@@ -1,0 +1,9 @@
+const TILE_TYPE_STREET = 1;
+const TILE_TYPE_WALL = 2;
+const WIDTH = 1280;
+const HEIGHT = 720; 
+const COLUMN_COUNT = 16;
+const TILE_SIZE = WIDTH/COLUMN_COUNT;
+const ROW_COUNT = HEIGHT/TILE_SIZE;
+const FRAME_RATE = 30;
+
