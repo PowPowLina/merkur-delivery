@@ -1,8 +1,10 @@
 class StreetMap {
     constructor() {
+        this.positionArr= [];
+        this.stationCol = 0;
         this.possibleMaps = [
             [
-                [1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
                 [2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2],
                 [2, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2],
                 [2, 1, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2],
@@ -13,7 +15,7 @@ class StreetMap {
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ],
             [
-                [1, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+                [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
                 [2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
                 [2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
                 [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2],
@@ -25,6 +27,24 @@ class StreetMap {
             ]
         ];
     }
+
+
+    getStationPos(map){
+        let posStationArr = [];
+        for (let i = 0; i < this.map.length; i++){
+            console.log(i, map[i].indexOf(3));
+          if(this.map[i].indexOf(3) >= 0){
+            posStationArr.push(i, this.map[i].indexOf(3));
+            row = posStationArr[0];
+            col = posStationArr[1];
+        }
+        this.positionArr = posStationArr;
+        console.log(this.positionArr);
+            return posStationArr;
+          }   
+    
+       }
+
     preload() {
         this.streetImage = loadImage('/assets/genericstreet.png');
         this.wallImage = loadImage('/assets/genericbuilding.png');
@@ -37,6 +57,7 @@ class StreetMap {
     setup() {
         const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
         this.map = this.possibleMaps[randomIndex];
+        this.getStationPos(this.map);
     }
 
     drawTile(tile, row, col) {
@@ -65,4 +86,5 @@ class StreetMap {
         }
     }
 
+   
 }

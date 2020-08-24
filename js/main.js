@@ -1,25 +1,41 @@
 const game = new Game();
 const streetMap = new StreetMap();
 
+let row;
+let col;
+
+
+
+
+
 let playerImage;
-const player = new Player(1,5);
+
 
 function preload(){
     streetMap.preload();
+    playerImage = loadImage('/assets/playerTile.png');
 }
+
 
 function setup(){
     streetMap.setup();
+   this.player = new Player(streetMap);
     frameRate(FRAME_RATE);
     createCanvas(WIDTH, HEIGHT);
-    playerImage = loadImage('/assets/playerTile.png');
+    
 
 }
-
+function keyPressed() {
+    console.log('this is a key', keyCode);
+    if (keyCode === 13){
+      player.move();
+    }
+  }
 
 function draw(){
+    clear();
     streetMap.draw();
-    player.draw(playerImage);
+    this.player.draw(playerImage);
     
 }
 
