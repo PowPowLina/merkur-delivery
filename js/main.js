@@ -1,42 +1,41 @@
 const game = new Game();
 const streetMap = new StreetMap();
-
-let row;
-let col;
+const player = new Player();
 
 
 
-
-
-let playerImage;
-
-
-function preload(){
+function preload() {
     streetMap.preload();
-    playerImage = loadImage('/assets/playerTile.png');
+    player.preload();
 }
 
 
-function setup(){
+function setup() {
     streetMap.setup();
-   this.player = new Player(streetMap);
+    player.setup(streetMap);
     frameRate(FRAME_RATE);
     createCanvas(WIDTH, HEIGHT);
-    
+
 
 }
-function keyPressed() {
-    console.log('this is a key', keyCode);
-    if (keyCode === 13){
-      player.move();
-    }
-  }
 
-function draw(){
+function keyPressed() {
+    if (keyCode === 13) {
+        if (player.velocity === 0) {
+            player.startEngine();
+        } else {
+            player.stopEngine();
+        }
+    }
+}
+
+function draw() {
+    // change world states
+    player.move();
+
+    // draw the current state
     clear();
     streetMap.draw();
-    this.player.draw(playerImage);
-    
+    player.draw();
+
 }
-
-

@@ -1,6 +1,5 @@
 class StreetMap {
     constructor() {
-        this.positionArr= [];
         this.stationCol = 0;
         this.possibleMaps = [
             [
@@ -29,21 +28,17 @@ class StreetMap {
     }
 
 
-    getStationPos(map){
+    getStationPos() {
         let posStationArr = [];
-        for (let i = 0; i < this.map.length; i++){
-            console.log(i, map[i].indexOf(3));
-          if(this.map[i].indexOf(3) >= 0){
-            posStationArr.push(i, this.map[i].indexOf(3));
-            row = posStationArr[0];
-            col = posStationArr[1];
-        }
-        this.positionArr = posStationArr;
-        console.log(this.positionArr);
+        for (let i = 0; i < this.map.length; i++) {
+            console.log(i, this.map[i].indexOf(3));
+            if (this.map[i].indexOf(3) >= 0) {
+                posStationArr.push(i, this.map[i].indexOf(3));
+            }
             return posStationArr;
-          }   
-    
-       }
+        }
+
+    }
 
     preload() {
         this.streetImage = loadImage('/assets/genericstreet.png');
@@ -55,12 +50,12 @@ class StreetMap {
 
 
     setup() {
-        const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
-        this.map = this.possibleMaps[randomIndex];
-        this.getStationPos(this.map);
+        //const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
+        this.map = this.possibleMaps[1];
+
     }
 
-    drawTile(tile, row, col) {
+    drawTile(tile, col, row) {
         let tileImage = this.defaultImage;
         switch (tile) {
             case TILE_TYPE_STREET:
@@ -73,7 +68,7 @@ class StreetMap {
                 tileImage = this.stationImage;
 
         }
-        image(tileImage, row * TILE_SIZE, col * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+        image(tileImage, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
     }
 
     draw() {
@@ -86,5 +81,5 @@ class StreetMap {
         }
     }
 
-   
+
 }

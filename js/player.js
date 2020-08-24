@@ -1,26 +1,49 @@
 class Player {
-    constructor(streetMap) {
-        console.log(streetMap.positionArr);
-        this.col = streetMap.positionArr[0]+1;
-        this.row = streetMap.positionArr[1];
+    constructor() {
+        this.velocity = 0;
+        this.direction = EAST_DIRECTION;
     }
 
     preload() {
+        this.playerImage = loadImage('/assets/playerTile.png');
+    }
+
+    setup(streetMap) {
+        this.streetMap = streetMap;
+        const stationPosition = streetMap.getStationPos();
+        this.row = stationPosition[0] + 1; //TODO make it flexible
+        this.col = stationPosition[1];
+
+
 
     }
 
-    setup() {
+
+    draw() {
+        image(this.playerImage, this.col * TILE_SIZE, this.row * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+    }
+
+    startEngine() {
+        this.velocity = 0.1;
+    }
+    stopEngine() {
+        this.velocity = 0;
+    }
+    isObstacleinPath() {
+     //  let y = this.row;
+     //   let x = this.col;
+
 
     }
 
-
-    draw(img) {
-        image(img, this.row * TILE_SIZE, this.col * TILE_SIZE, TILE_SIZE, TILE_SIZE);
+    checkObstacles() {
+        if (this.col >= 15 || this.isObstacleinPath()) {
+            this.stopEngine();
+        }
     }
 
     move() {
-    while (this.col < COLUMN_COUNT && this.row < ROW_COUNT) {
-        this.col = this.col + 1;
-    }
+        this.checkObstacles();
+        this.col += this.velocity;
     }
 }
