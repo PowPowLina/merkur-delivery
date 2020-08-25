@@ -17,10 +17,10 @@ class StreetMap {
                 [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
                 [2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
                 [2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2],
+                [2, 1, 1, 1, 1, 1, 2, 1, 2, 4, 2, 1, 2, 1, 2, 2],
                 [2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2],
                 [2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2],
-                [2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2],
+                [2, 2, 1, 1, 1, 4, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2],
                 [2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2],
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]
@@ -45,6 +45,8 @@ class StreetMap {
         this.wallImage = loadImage('/assets/genericbuilding.png');
         this.stationImage = loadImage('/assets/merkurStationTile.png');
         this.defaultImage = loadImage('/assets/nopic.png');
+        this.packageImage = loadImage('/assets/package.png');
+    
 
     }
 
@@ -66,6 +68,10 @@ class StreetMap {
                 break;
             case TILE_TYPE_STATION:
                 tileImage = this.stationImage;
+                break;
+            case TILE_TYPE_PACKAGE:
+                tileImage = this.packageImage;
+                break;
 
         }
         image(tileImage, col * TILE_SIZE, row * TILE_SIZE, TILE_SIZE, TILE_SIZE);

@@ -1,6 +1,7 @@
 const TILE_TYPE_STREET = 1;
 const TILE_TYPE_WALL = 2;
 const TILE_TYPE_STATION = 3;
+const TILE_TYPE_PACKAGE = 4;
 const WIDTH = 1280;
 const HEIGHT = 720; 
 const COLUMN_COUNT = 16;

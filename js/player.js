@@ -3,6 +3,7 @@ class Player {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
         this.fuelMoney = 500;
+        this.packagesDelivered = 0;
 
     }
 
@@ -25,6 +26,9 @@ class Player {
         imageMode(CENTER);
         image(this.playerImage, 0, 0, TILE_SIZE, TILE_SIZE);
         pop();
+
+        document.getElementById('fuel-money').innerHTML = Math.floor(this.fuelMoney);
+        document.getElementById('packages-delivered').innerHTML = this.packagesDelivered;
     }
 
     startEngine() {
@@ -37,6 +41,7 @@ class Player {
     mapTileToSimpleTileType(tile) {
         switch (tile) {
             case TILE_TYPE_STREET:
+            case TILE_TYPE_PACKAGE:
                 return SIMPLE_TILE_SPACE;
             case TILE_TYPE_WALL:
             case TILE_TYPE_STATION:
@@ -104,6 +109,7 @@ class Player {
 
     move() {
         this.checkObstacles();
+        this.fuelMoney -= this.velocity;
 
         //console.log(this.row, this.col);
         switch (this.direction) {
