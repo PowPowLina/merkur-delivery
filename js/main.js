@@ -11,12 +11,11 @@ function preload() {
 
 
 function setup() {
+    angleMode(DEGREES);
     streetMap.setup();
     player.setup(streetMap);
     frameRate(FRAME_RATE);
     createCanvas(WIDTH, HEIGHT);
-
-
 }
 
 function keyPressed() {
@@ -27,15 +26,18 @@ function keyPressed() {
             player.stopEngine();
         }
     }
+    if (keyCode === 32) {
+        player.turnRight();
+    }
 }
 
 function draw() {
     // change world states
     player.move();
-
+    
     // draw the current state
     clear();
     streetMap.draw();
     player.draw();
-
+   
 }
