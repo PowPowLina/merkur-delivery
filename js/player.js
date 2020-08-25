@@ -2,6 +2,7 @@ class Player {
     constructor() {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
+        this.fuelMoney = 500;
 
     }
 
@@ -33,42 +34,44 @@ class Player {
         this.velocity = 0;
     }
 
+    mapTileToSimpleTileType(tile) {
+        switch (tile) {
+            case TILE_TYPE_STREET:
+                return SIMPLE_TILE_SPACE;
+            case TILE_TYPE_WALL:
+            case TILE_TYPE_STATION:
+                return SIMPLE_TILE_BARRIER;
+            default:
+                console.warn('Unknown tile in tile mapper.');
+                return SIMPLE_TILE_SPACE;
+        }
+    }
+
+    isTileBarrier(row, col) {
+        return this.mapTileToSimpleTileType(streetMap.map[row][col]) === SIMPLE_TILE_BARRIER;
+    }
+
     isObstacleinPath() {
-         // TODO check for obstacles in path depending on direction
+        // TODO check for obstacles in path depending on direction
 
         if (this.direction == EAST_DIRECTION) {
-            if (streetMap.map[Math.floor(this.row)][Math.floor(this.col) + 1] === TILE_TYPE_WALL) {
-                return true;
-            }
-            return false;
+            return this.isTileBarrier(Math.floor(this.row), Math.floor(this.col) + 1);
         }
         if (this.direction == WEST_DIRECTION) {
-            if (streetMap.map[Math.floor(this.row)][Math.ceil(this.col) - 1] === TILE_TYPE_WALL) {
-                return true;
-            }
-            return false;
+            return this.isTileBarrier(Math.floor(this.row), Math.ceil(this.col) - 1);
         }
         if (this.direction == NORTH_DIRECTION) {
-            if (streetMap.map[Math.ceil(this.row) - 1 ][Math.floor(this.col)] === TILE_TYPE_WALL) {
-                return true;
-            }
-            return false;
+            return this.isTileBarrier(Math.ceil(this.row) - 1, Math.floor(this.col));
+
         }
         if (this.direction == SOUTH_DIRECTION) {
-            if (streetMap.map[Math.floor(this.row) + 1][Math.floor(this.col)] === TILE_TYPE_WALL) {
-                return true;
-            }
-            return false;
+            return this.isTileBarrier(Math.floor(this.row) + 1, Math.floor(this.col));
         }
     }
 
 
     checkObstacles() {
         // TODO check for screen boundaries and stop if found depending on direction
-
-       
-
-
         if (this.col >= 15) {
             this.stopEngine();
         }
@@ -101,7 +104,7 @@ class Player {
 
     move() {
         this.checkObstacles();
-        
+
         //console.log(this.row, this.col);
         switch (this.direction) {
             case EAST_DIRECTION:
