@@ -17,13 +17,18 @@ class StreetMap {
                 [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
                 [2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
                 [2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                [2, 1, 1, 1, 1, 1, 2, 1, 2, 4, 2, 1, 2, 1, 2, 2],
+                [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2],
                 [2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2],
                 [2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2],
-                [2, 2, 1, 1, 1, 4, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2],
+                [2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2],
                 [2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2],
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]
+        ];
+
+        this.possiblePackages = [
+            [new Package(8,2),new Package(1,13)],
+            [new Package(3,9),new Package(6,5)]
         ];
     }
 
@@ -31,7 +36,6 @@ class StreetMap {
     getStationPos() {
         let posStationArr = [];
         for (let i = 0; i < this.map.length; i++) {
-            console.log(i, this.map[i].indexOf(3));
             if (this.map[i].indexOf(3) >= 0) {
                 posStationArr.push(i, this.map[i].indexOf(3));
             }
@@ -46,15 +50,32 @@ class StreetMap {
         this.stationImage = loadImage('/assets/merkurStationTile.png');
         this.defaultImage = loadImage('/assets/nopic.png');
         this.packageImage = loadImage('/assets/package.png');
-    
-
     }
 
 
     setup() {
         //const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
-        this.map = this.possibleMaps[1];
+        const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
+        this.map = this.possibleMaps[randomIndex];
 
+        this.possiblePackages[randomIndex].forEach(function (myPackage) {
+            myPackage.reset();
+        });
+
+        this.packages = this.possiblePackages[1];
+    }
+
+    getPackageOnTile(row, col) {
+        for(let i = 0; i < this.packages.length; i++) {
+            if(this.packages[i].isHere(row, col)) {
+                return this.packages[i];
+            }
+        }
+        return null;
+    }
+
+    reset() {
+        this.setup();
     }
 
     drawTile(tile, col, row) {
@@ -85,6 +106,12 @@ class StreetMap {
                 this.drawTile(tile, j, i);
             }
         }
+
+        const packageImage = this.packageImage;
+        // draw packages
+        this.packages.forEach( function (myPackage) {
+            myPackage.draw(packageImage);
+        });
     }
 
 

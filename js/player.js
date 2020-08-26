@@ -2,9 +2,8 @@ class Player {
     constructor() {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
-        this.fuelMoney = 250;
+        this.fuelMoney = 40;
         this.packagesDelivered = 0;
-
     }
 
     preload() {
@@ -18,6 +17,13 @@ class Player {
         this.col = stationPosition[1];
     }
 
+    reset(){
+        this.velocity = 0;
+        this.direction = EAST_DIRECTION;
+        this.fuelMoney = 40;
+        this.packagesDelivered = 0;
+        this.setup(this.streetMap);
+    }
 
     draw() {
         push();
@@ -29,6 +35,9 @@ class Player {
 
         document.getElementById('fuel-money').innerHTML = Math.floor(this.fuelMoney);
         document.getElementById('packages-delivered').innerHTML = this.packagesDelivered;
+        if (this.fuelMoney === 0){
+            frameRate(0);}
+        
     }
 
     startEngine() {
@@ -55,7 +64,7 @@ class Player {
     // --------------------------------Check Obstacles -----------------------------------------
 
     isTileBarrier(row, col) {
-        return this.mapTileToSimpleTileType(streetMap.map[row][col]) === SIMPLE_TILE_BARRIER;
+        return this.mapTileToSimpleTileType(this.streetMap.map[row][col]) === SIMPLE_TILE_BARRIER;
     }
 
     isObstacleinPath() {
@@ -90,41 +99,34 @@ class Player {
 
     // --------------------------------Check Packages -----------------------------------------
 
-    isTilePackage(row, col) {
-        return streetMap.map[row][col] === TILE_TYPE_PACKAGE;
+    getTilePackage(row, col) {
+        return this.streetMap.getPackageOnTile(row, col);
     }
 
-    isPackageinPath() {
+    getPackageinPath() {
         if (this.direction == EAST_DIRECTION) {
-
-            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
+            return this.getTilePackage(Math.floor(this.row), Math.floor(this.col));
         }
         if (this.direction == WEST_DIRECTION) {
 
-            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
+            return this.getTilePackage(Math.floor(this.row), Math.floor(this.col));
         }
         if (this.direction == NORTH_DIRECTION) {
-
-            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
-
+            return this.getTilePackage(Math.floor(this.row), Math.floor(this.col));
         }
         if (this.direction == SOUTH_DIRECTION) {
-
-            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
+            return this.getTilePackage(Math.floor(this.row), Math.floor(this.col));
         }
     }
 
     checkPackages() {
-        if (this.isPackageinPath()) {
-            console.log(streetMap.map, this.row,this.col);
-            streetMap.map[Math.floor(this.row)][Math.floor(this.col)] = TILE_TYPE_STREET;
+        const packageInPath = this.getPackageinPath();
+        if (packageInPath) {
+            packageInPath.pickUp();
             this.packagesDelivered += 1;
             this.fuelMoney += 10;
         }
     }
-
-    
-
 
     turnRight() {
         switch (this.direction) {
@@ -151,6 +153,7 @@ class Player {
     move() {
         this.checkObstacles();
         this.checkPackages();
+       
 
         this.fuelMoney -= this.velocity;
 
@@ -169,7 +172,11 @@ class Player {
                 this.row -= this.velocity;
                 break;
         }
+    }
 
-        // TODO drive in the direction the car is facing
+    nextLevel(){
+        if (this.package.isVisible == false && (this.row == stationPosition[0] + 1, this.col ==stationPosition[1])){
+
+        }
     }
 }

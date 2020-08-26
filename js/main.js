@@ -1,43 +1,38 @@
 const game = new Game();
-const streetMap = new StreetMap();
-const player = new Player();
+
 
 
 
 function preload() {
-    streetMap.preload();
-    player.preload();
+   
+    game.preload();
 }
 
 
 function setup() {
     angleMode(DEGREES);
-    streetMap.setup();
-    player.setup(streetMap);
     frameRate(FRAME_RATE);
     createCanvas(WIDTH, HEIGHT);
+    game.setup();
 }
 
 function keyPressed() {
-    if (keyCode === 13) {
-        if (player.velocity === 0) {
-            player.startEngine();
-        } else {
-            player.stopEngine();
-        }
-    }
-    if (keyCode === 32) {
-        player.turnRight();
-    }
+    game.keyPressed();
 }
 
 function draw() {
+
+    game.draw();
+
+
     // change world states
-    player.move();
+    //if (player.fuelMoney < 1){
+    //    frameRate(0);}
+    //player.move();
     
     // draw the current state
-    clear();
-    streetMap.draw();
-    player.draw();
+    //clear();
+    //streetMap.draw();
+    //player.draw();
    
 }
