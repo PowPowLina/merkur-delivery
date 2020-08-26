@@ -52,12 +52,14 @@ class Player {
         }
     }
 
+    // --------------------------------Check Obstacles -----------------------------------------
+
     isTileBarrier(row, col) {
         return this.mapTileToSimpleTileType(streetMap.map[row][col]) === SIMPLE_TILE_BARRIER;
     }
 
     isObstacleinPath() {
-        // TODO check for obstacles in path depending on direction
+        // check for obstacles in path depending on direction
 
         if (this.direction == EAST_DIRECTION) {
             return this.isTileBarrier(Math.floor(this.row), Math.floor(this.col) + 1);
@@ -85,6 +87,41 @@ class Player {
         }
     }
 
+
+    // --------------------------------Check Packages -----------------------------------------
+
+    isTilePackage(row, col) {
+        return streetMap.map[row][col] === TILE_TYPE_PACKAGE;
+    }
+
+    isPackageinPath() {
+        if (this.direction == EAST_DIRECTION) {
+
+            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
+        }
+        if (this.direction == WEST_DIRECTION) {
+
+            return this.isTilePackage(Math.floor(this.row), Math.ceil(this.col));
+        }
+        if (this.direction == NORTH_DIRECTION) {
+
+            return this.isTilePackage(Math.ceil(this.row), Math.floor(this.col));
+
+        }
+        if (this.direction == SOUTH_DIRECTION) {
+
+            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
+        }
+    }
+
+    checkPackages() {
+        if (this.isPackageinPath()) {
+            map[this.row][this.col] = TILE_TYPE_STREET;
+        }
+    }
+
+
+
     turnRight() {
         switch (this.direction) {
             case EAST_DIRECTION:
@@ -109,6 +146,8 @@ class Player {
 
     move() {
         this.checkObstacles();
+        this.checkPackages();
+
         this.fuelMoney -= this.velocity;
 
         //console.log(this.row, this.col);
