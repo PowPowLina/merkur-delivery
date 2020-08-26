@@ -2,7 +2,7 @@ class Player {
     constructor() {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
-        this.fuelMoney = 500;
+        this.fuelMoney = 250;
         this.packagesDelivered = 0;
 
     }
@@ -101,11 +101,11 @@ class Player {
         }
         if (this.direction == WEST_DIRECTION) {
 
-            return this.isTilePackage(Math.floor(this.row), Math.ceil(this.col));
+            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
         }
         if (this.direction == NORTH_DIRECTION) {
 
-            return this.isTilePackage(Math.ceil(this.row), Math.floor(this.col));
+            return this.isTilePackage(Math.floor(this.row), Math.floor(this.col));
 
         }
         if (this.direction == SOUTH_DIRECTION) {
@@ -116,10 +116,14 @@ class Player {
 
     checkPackages() {
         if (this.isPackageinPath()) {
-            map[this.row][this.col] = TILE_TYPE_STREET;
+            console.log(streetMap.map, this.row,this.col);
+            streetMap.map[Math.floor(this.row)][Math.floor(this.col)] = TILE_TYPE_STREET;
+            this.packagesDelivered += 1;
+            this.fuelMoney += 10;
         }
     }
 
+    
 
 
     turnRight() {

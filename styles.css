@@ -3,23 +3,36 @@ body {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    font-family: "Spartan", sans-serif;
-    background-color: #c8dad3;
+    font-family: 'Audiowide', cursive;
+    background-color: #6db3ec;
+    font-size: 18px;
   }
 
   section {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    margin: 10px 10px;
-    padding: 10px;
+ 
+    color: #083B66;
+    font-size: 1.5em;
+    align-items: flex-end;
   }
 
   #fuel-money {
-    padding: 0 100px;
+  margin-bottom: 27px;
+  margin-left: 10px;
+  margin-top: 27px;
+  margin-right: 30px;
   }
 
   #packages-delivered {
-    padding: 0 100px;
-  }
+    margin-bottom: 27px;
+    margin-left: 10px;
+    margin-top: 27px;
+    margin-right: 30px;
+    }
+
+
   
+
+ 
