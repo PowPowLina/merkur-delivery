@@ -8,7 +8,7 @@ body {
     font-size: 18px;
   }
 
-  section {
+  .scores {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -31,7 +31,21 @@ body {
     margin-right: 30px;
     }
   
+    .introScreen {
+      position: absolute;
+      color: #F2D279;
+      top: 253px;
+    }
 
+    .title{
+      font-size: 2em;
+      padding-bottom: 300px;
+    }
+
+    .instructions{
+      font-size: 1em;
+      width: 400px;
+    }
 
   
 

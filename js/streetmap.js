@@ -1,6 +1,7 @@
 class StreetMap {
     constructor() {
-        this.stationCol = 0;
+        this.stationsPos = [0,0];
+        
         this.possibleMaps = [
             [
                 [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
@@ -27,7 +28,7 @@ class StreetMap {
         ];
 
         this.possiblePackages = [
-            [new Package(8,2),new Package(1,13)],
+            [new Package(7,2),new Package(1,13)],
             [new Package(3,9),new Package(6,5)]
         ];
     }
@@ -58,11 +59,13 @@ class StreetMap {
         const randomIndex = Math.floor(Math.random() * this.possibleMaps.length);
         this.map = this.possibleMaps[randomIndex];
 
+        this.stationPos = this.getStationPos(); 
+
         this.possiblePackages[randomIndex].forEach(function (myPackage) {
             myPackage.reset();
         });
 
-        this.packages = this.possiblePackages[1];
+        this.packages = this.possiblePackages[randomIndex];
     }
 
     getPackageOnTile(row, col) {
@@ -72,6 +75,15 @@ class StreetMap {
             }
         }
         return null;
+    }
+
+    isAllPackagesGone() {
+        for(let i = 0; i < this.packages.length; i++) {
+            if(this.packages[i].isVisible) {
+                return false;
+            }
+        }
+        return true;
     }
 
     reset() {

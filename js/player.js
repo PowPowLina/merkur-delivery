@@ -25,6 +25,13 @@ class Player {
         this.setup(this.streetMap);
     }
 
+    continue(){
+        this.velocity = 0;
+        this.direction = EAST_DIRECTION;
+        this.packagesDelivered = 0;
+        this.setup(this.streetMap);
+    }
+
     draw() {
         push();
         translate(this.col * TILE_SIZE + (TILE_SIZE / 2), this.row * TILE_SIZE + (TILE_SIZE / 2));
@@ -33,8 +40,8 @@ class Player {
         image(this.playerImage, 0, 0, TILE_SIZE, TILE_SIZE);
         pop();
 
-        document.getElementById('fuel-money').innerHTML = Math.floor(this.fuelMoney);
-        document.getElementById('packages-delivered').innerHTML = this.packagesDelivered;
+        document.getElementById('fuel-money').innerHTML = 'Fuel: ' + Math.floor(this.fuelMoney);
+        document.getElementById('packages-delivered').innerHTML = 'Delivered Packages: ' + this.packagesDelivered;
         if (this.fuelMoney === 0){
             frameRate(0);}
         
@@ -174,9 +181,5 @@ class Player {
         }
     }
 
-    nextLevel(){
-        if (this.package.isVisible == false && (this.row == stationPosition[0] + 1, this.col ==stationPosition[1])){
-
-        }
-    }
+   
 }
