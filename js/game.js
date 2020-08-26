@@ -6,8 +6,8 @@ class Game {
     }
 
     preload() {
-        this.gamePreStartImg = loadImage('/assets/introtruck.gif');
-        this.gameOverImg = loadImage('/assets/gameOver.png');
+        this.gamePreStartImg = loadImage('./assets/introtruck.gif');
+        this.gameOverImg = loadImage('./assets/gameOver.png');
         this.streetMap.preload();
         this.player.preload();
     }

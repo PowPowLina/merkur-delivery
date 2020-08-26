@@ -7,7 +7,7 @@ class Player {
     }
 
     preload() {
-        this.playerImage = loadImage('/assets/truck.png');
+        this.playerImage = loadImage('./assets/truck.png');
     }
 
     setup(streetMap) {

@@ -3,9 +3,9 @@ class StreetMap {
 
     }
     preload() {
-        this.streetImage = loadImage('/assets/genericstreet.png');
-        this.wallImage = loadImage('/assets/genericbuilding.png');
-        this.defaultImage = loadImage('/assets/nopic.png');
+        this.streetImage = loadImage('./assets/genericstreet.png');
+        this.wallImage = loadImage('./assets/genericbuilding.png');
+        this.defaultImage = loadImage('./assets/nopic.png');
     }
 
     randomTile(){
