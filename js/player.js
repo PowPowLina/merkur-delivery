@@ -61,6 +61,9 @@ class Player {
                 return SIMPLE_TILE_SPACE;
             case TILE_TYPE_WALL:
             case TILE_TYPE_STATION:
+            case TILE_TYPE_PARK:
+            case TILE_TYPE_HOUSE:  
+            case TILW_TYPE_BUILD:  
                 return SIMPLE_TILE_BARRIER;
             default:
                 console.warn('Unknown tile in tile mapper.');
@@ -131,7 +134,7 @@ class Player {
         if (packageInPath) {
             packageInPath.pickUp();
             this.packagesDelivered += 1;
-            this.fuelMoney += 10;
+            this.fuelMoney += 20;
         }
     }
 

@@ -5,24 +5,24 @@ class StreetMap {
         this.possibleMaps = [
             [
                 [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                [2, 1, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 2],
-                [2, 1, 2, 1, 1, 1, 2, 2, 1, 1, 1, 1, 1, 2, 2, 2],
-                [2, 1, 1, 2, 2, 1, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2],
-                [2, 1, 2, 2, 1, 2, 1, 2, 2, 2, 1, 1, 1, 1, 2, 2],
-                [2, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 2, 1, 2],
-                [2, 1, 1, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 2, 1, 2],
-                [2, 2, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 2],
+                [2, 1, 1, 6, 1, 6, 1, 1, 1, 6, 1, 6, 1, 1, 1, 2],
+                [2, 1, 6, 1, 1, 1, 6, 5, 1, 1, 1, 1, 1, 6, 6, 2],
+                [2, 1, 1, 6, 6, 1, 1, 1, 7, 1, 6, 1, 6, 1, 1, 2],
+                [2, 1, 7, 7, 1, 6, 1, 6, 7, 6, 1, 1, 1, 1, 6, 2],
+                [2, 1, 7, 1, 1, 1, 1, 1, 7, 1, 1, 6, 1, 7, 1, 2],
+                [2, 1, 1, 6, 1, 5, 1, 6, 1, 1, 7, 1, 1, 7, 1, 2],
+                [2, 6, 1, 1, 1, 1, 1, 1, 1, 6, 7, 5, 1, 1, 1, 2],
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ],
             [
                 [2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-                [2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 2, 1, 2, 2],
-                [2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
-                [2, 1, 1, 1, 1, 1, 2, 1, 2, 1, 2, 1, 2, 1, 2, 2],
-                [2, 1, 2, 1, 2, 1, 1, 1, 2, 1, 2, 1, 1, 1, 1, 2],
-                [2, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 2, 2, 1, 2],
-                [2, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2, 2, 1, 1, 1, 2],
-                [2, 2, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 2, 1, 2],
+                [2, 1, 1, 1, 1, 1, 1, 6, 1, 6, 1, 7, 7, 1, 6, 2],
+                [2, 6, 1, 6, 1, 6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+                [2, 1, 1, 1, 1, 1, 6, 1, 7, 1, 7, 1, 5, 1, 6, 2],
+                [2, 1, 7, 1, 5, 1, 1, 1, 7, 1, 7, 1, 1, 1, 1, 2],
+                [2, 1, 7, 1, 6, 1, 6, 1, 1, 1, 1, 1, 7, 7, 1, 2],
+                [2, 6, 1, 1, 1, 1, 1, 1, 6, 1, 6, 6, 1, 1, 1, 2],
+                [2, 6, 6, 1, 6, 1, 5, 1, 1, 1, 1, 1, 1, 6, 1, 2],
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]
         ];
@@ -48,6 +48,9 @@ class StreetMap {
     preload() {
         this.streetImage = loadImage('./assets/genericstreet.png');
         this.wallImage = loadImage('./assets/genericbuilding.png');
+        this.parkImage = loadImage('./assets/parkTile.gif');
+        this.houseImage = loadImage('/assets/houseTile.gif');
+        this.buildingImage = loadImage('/assets/buildingTile.gif');
         this.stationImage = loadImage('./assets/merkurStationTile.png');
         this.defaultImage = loadImage('./assets/nopic.png');
         this.packageImage = loadImage('./assets/package.png');
@@ -98,6 +101,15 @@ class StreetMap {
                 break;
             case TILE_TYPE_WALL:
                 tileImage = this.wallImage;
+                break;
+            case TILE_TYPE_PARK:
+                tileImage = this.parkImage;
+                break;
+                case TILE_TYPE_HOUSE:
+                tileImage = this.houseImage;
+                break;
+                case TILW_TYPE_BUILD:
+                tileImage = this.buildingImage;
                 break;
             case TILE_TYPE_STATION:
                 tileImage = this.stationImage;
