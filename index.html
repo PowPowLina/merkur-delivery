@@ -9,11 +9,12 @@
     />
     <link rel="stylesheet" href="styles.css" />
     <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5/lib/addons/p5.sound.min.js></script>
+
 
     <title>Merkur Delivery</title>
   </head>
   <body>
-    <script src="./dependencies/pathfinding-browser.min.js"></script>
     <script src="./js/constants.js"></script>
     <script src="./js/player.js"></script>
     <script src="./js/package.js"></script>
@@ -29,12 +30,14 @@
       <section class="instructions">
         <p>Enter = Start and pause truck</p>
         <p>Space = Turn right</p>
+        <p>N = New game</p>
         <p>Get all the packages delivered and return to base before the fuel runs out!</p>
       </section>
     </div>
     <section class="scores">
       <div id="fuel-money"></div>
       <div id="packages-delivered"></div>
+      <div id="total-packages-delivered"></div>
     </section>
   </body>
 </html>

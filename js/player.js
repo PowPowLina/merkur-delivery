@@ -2,12 +2,14 @@ class Player {
     constructor() {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
-        this.fuelMoney = 40;
+        this.fuelMoney = FUEL_START;
         this.packagesDelivered = 0;
+        this.packagesDeliveredTotal = 0;
     }
 
     preload() {
         this.playerImage = loadImage('./assets/truck.png');
+        this.pickupSound = loadSound("./assets/pickup.mp3");
     }
 
     setup(streetMap) {
@@ -17,18 +19,20 @@ class Player {
         this.col = stationPosition[1];
     }
 
-    reset(){
+    reset() {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
-        this.fuelMoney = 40;
+        this.fuelMoney = FUEL_START;
         this.packagesDelivered = 0;
+        this.packagesDeliveredTotal = 0;
         this.setup(this.streetMap);
     }
 
-    continue(){
+    continue () {
         this.velocity = 0;
         this.direction = EAST_DIRECTION;
         this.packagesDelivered = 0;
+        this.fuelMoney += FUEL_STATION;
         this.setup(this.streetMap);
     }
 
@@ -42,9 +46,7 @@ class Player {
 
         document.getElementById('fuel-money').innerHTML = 'Fuel: ' + Math.floor(this.fuelMoney);
         document.getElementById('packages-delivered').innerHTML = 'Delivered Packages: ' + this.packagesDelivered;
-        if (this.fuelMoney === 0){
-            frameRate(0);}
-        
+        document.getElementById('total-packages-delivered').innerHTML = 'Total Delivered Packages: ' + this.packagesDeliveredTotal;
     }
 
     startEngine() {
@@ -62,8 +64,8 @@ class Player {
             case TILE_TYPE_WALL:
             case TILE_TYPE_STATION:
             case TILE_TYPE_PARK:
-            case TILE_TYPE_HOUSE:  
-            case TILW_TYPE_BUILD:  
+            case TILE_TYPE_HOUSE:
+            case TILW_TYPE_BUILD:
                 return SIMPLE_TILE_BARRIER;
             default:
                 console.warn('Unknown tile in tile mapper.');
@@ -132,9 +134,12 @@ class Player {
     checkPackages() {
         const packageInPath = this.getPackageinPath();
         if (packageInPath) {
+            this.pickupSound.setVolume(1);
+            this.pickupSound.play();
             packageInPath.pickUp();
             this.packagesDelivered += 1;
-            this.fuelMoney += 20;
+            this.packagesDeliveredTotal++;
+            this.fuelMoney += FUEL_PACKAGE;
         }
     }
 
@@ -163,11 +168,9 @@ class Player {
     move() {
         this.checkObstacles();
         this.checkPackages();
-       
 
         this.fuelMoney -= this.velocity;
 
-        //console.log(this.row, this.col);
         switch (this.direction) {
             case EAST_DIRECTION:
                 this.col += this.velocity;
@@ -184,5 +187,5 @@ class Player {
         }
     }
 
-   
+
 }

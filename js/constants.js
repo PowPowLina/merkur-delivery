@@ -23,4 +23,7 @@ const GAME_PLAY = 2;
 const SIMPLE_TILE_SPACE = 0;
 const SIMPLE_TILE_BARRIER = 1;
 
+const FUEL_START = 30;
+const FUEL_PACKAGE = 10;
+const FUEL_STATION = 20;
 
