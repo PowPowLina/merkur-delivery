@@ -49,8 +49,8 @@ class StreetMap {
         this.streetImage = loadImage('./assets/genericstreet.png');
         this.wallImage = loadImage('./assets/genericbuilding.png');
         this.parkImage = loadImage('./assets/parkTile.gif');
-        this.houseImage = loadImage('/assets/houseTile.gif');
-        this.buildingImage = loadImage('/assets/buildingTile.gif');
+        this.houseImage = loadImage('./assets/houseTile.gif');
+        this.buildingImage = loadImage('./assets/buildingTile.gif');
         this.stationImage = loadImage('./assets/merkurStationTile.png');
         this.defaultImage = loadImage('./assets/nopic.png');
         this.packageImage = loadImage('./assets/package.png');
